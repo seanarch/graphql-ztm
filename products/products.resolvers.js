@@ -2,14 +2,19 @@ const productsModel = require("./products.model");
 
 module.exports = {
   Query: {
-    products: (parent) => {
+    products: () => {
       return productsModel.getAllProducts();
     },
-    productsByPrice: (parent, args) => {
+    productsByPrice: (_, args) => {
       return productsModel.getProductsByPrice(args.min, args.max);
     },
-    productById: (parent, args) => {
+    productById: (_, args) => {
       return productsModel.getProductById(args.productId);
+    },
+  },
+  Mutation: {
+    addNewProduct: (_, args) => {
+      return productsModel.addNewProduct(args.id, args.description, args.price);
     },
   },
 };
