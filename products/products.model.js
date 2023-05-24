@@ -24,7 +24,7 @@ function getProductsByPrice(minPrice, maxPrice) {
 }
 
 function getProductById(productId) {
-  return products.filter((product) => {
+  return products.find((product) => {
     return product.id === productId;
   });
 }
@@ -41,9 +41,24 @@ function addNewProduct(id, description, price) {
   return newProduct;
 }
 
+function addNewProductReview(id, rating, comment) {
+  const matchedProduct = getProductById(id);
+
+  if (matchedProduct) {
+    const newReview = {
+      rating,
+      comment,
+    };
+
+    matchedProduct.reviews.push(newReview);
+    return newReview;
+  }
+}
+
 module.exports = {
   getAllProducts,
   getProductsByPrice,
   getProductById,
   addNewProduct,
+  addNewProductReview,
 };
